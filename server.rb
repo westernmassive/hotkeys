@@ -3,6 +3,8 @@
 require 'sinatra'
 require "sinatra/namespace"
 require 'mongoid'
+require 'mongo'
+
 
 #setup dev db
 Mongoid.load! "mongoid.config"

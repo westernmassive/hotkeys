@@ -4,7 +4,12 @@ require 'sinatra'
 require "sinatra/namespace"
 require 'mongoid'
 require 'mongo'
+require 'json'
 
+post '/payload' do
+  push = JSON.parse(request.body.read)
+  puts "I got some JSON: #{push.inspect}"
+end
 
 #setup dev db
 Mongoid.load! "mongoid.config"
@@ -43,3 +48,14 @@ end
      HotKey.all.to_json
     # HotKeys.map { |hotkey| HotkeySerializer.new(HotKey) }.to_json
   end
+
+  post '/api-ai' do
+    push = JSON.parse(request.body.read)
+    puts "I got some JSON: #{push.inspect}"
+    content_type :json
+  {  "speech": "the hotkeys are ...",
+        "displayText": "the hotkeys are ...",
+        #"data": {},
+        # "contextOut": [],
+        "source": "Hotkey" }.to_json
+end
